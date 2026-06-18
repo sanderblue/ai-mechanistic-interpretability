@@ -1,0 +1,12 @@
+# E02 — Causal tracing on Qwen3-0.6B (nnsight backend).
+#
+# Run:  python -m interp.run causal_tracing --config configs/causal_tracing_qwen3.yaml
+#
+# The interchange-corruption design means this runs unchanged on nnsight: only the
+# patch primitive is needed, and the adapter supports it on both backends.
+model: qwen3-0.6b
+backend: auto
+seed: 0
+
+fact_id: france_japan        # defined in data/facts.yaml
+metric: logit_diff

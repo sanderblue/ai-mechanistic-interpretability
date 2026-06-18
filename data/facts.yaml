@@ -1,0 +1,31 @@
+# A small library of clean/corrupt prompt pairs for causal tracing (E02).
+#
+# Each pair swaps a single-token subject inside an identical template, so the two
+# prompts tokenise to the same length and differ at exactly one position — the
+# requirement interchange corruption needs. The causal trace then measures, at
+# every (layer, position), how much patching the clean activation back into the
+# corrupt run restores the correct answer.
+#
+# Reference a pair from a config with `fact_id: <key>`.
+
+facts:
+  france_japan:
+    clean_prompt: "The capital of France is"
+    corrupt_prompt: "The capital of Japan is"
+    answer: " Paris"
+    counterfactual_answer: " Tokyo"
+    subject: "France"
+
+  japan_france:
+    clean_prompt: "The capital of Japan is"
+    corrupt_prompt: "The capital of France is"
+    answer: " Tokyo"
+    counterfactual_answer: " Paris"
+    subject: "Japan"
+
+  italy_spain:
+    clean_prompt: "The capital of Italy is"
+    corrupt_prompt: "The capital of Spain is"
+    answer: " Rome"
+    counterfactual_answer: " Madrid"
+    subject: "Italy"

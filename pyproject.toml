@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "interp"
+version = "0.1.0"
+description = "A small, extensible lab for mechanistic-interpretability experiments (logit lens & causal tracing) on small language models."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Sander Blue", email = "sblue@sanderblue.com" }]
+keywords = [
+    "mechanistic-interpretability",
+    "logit-lens",
+    "activation-patching",
+    "causal-tracing",
+    "transformers",
+]
+dependencies = [
+    "torch>=2.2",
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+    "pyyaml>=6.0",
+    "transformers>=4.44",
+]
+
+[project.optional-dependencies]
+# Backends are optional extras so you can install only what you need, and so a
+# version skew between them never blocks the other path. The adapters import
+# their backend lazily, so `interp[tl]` alone runs GPT-2 without nnsight present.
+tl = ["transformer-lens>=2.0"]
+nnsight = ["nnsight>=0.3"]
+dev = ["pytest>=8.0", "ruff>=0.6", "jupytext>=1.16"]
+
+[project.scripts]
+interp = "interp.run:main"
+
+[tool.setuptools.packages.find]
+include = ["interp*", "experiments*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+# E501 (line length) is handled by the formatter; long docstrings/tables are fine.
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: requires downloading model weights / runs a real forward pass (deselected by default)",
+]
+# By default we run only the fast, hermetic unit tests. Use `pytest -m integration`
+# (or `make test-integration`) to run the model-backed tests locally.
+addopts = "-m 'not integration'"
+testpaths = ["tests"]

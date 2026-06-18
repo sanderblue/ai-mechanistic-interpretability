@@ -1,0 +1,12 @@
+# E01 — Logit lens on Qwen3-0.6B (nnsight backend).
+#
+# Run:  python -m interp.run logit_lens --config configs/logit_lens_qwen3.yaml
+#
+# Same experiment, different backend and a deeper (28-layer) model — this is the
+# adapter doing its job: identical experiment code, GPT-2 -> Qwen3, TL -> nnsight.
+model: qwen3-0.6b
+backend: auto
+seed: 0
+
+prompt: "Water is made of hydrogen and"
+answer: " oxygen"

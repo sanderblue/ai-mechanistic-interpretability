@@ -1,0 +1,14 @@
+# E02 — Causal tracing on GPT-2 (TransformerLens backend).
+#
+# Run:  python -m interp.run causal_tracing --config configs/causal_tracing_gpt2.yaml
+#
+# Clean "The capital of France is" vs corrupt "The capital of Japan is": patch the
+# clean residual stream back into the corrupt run at every (layer, position) and
+# see where the France->Paris association is recoverable. Expect recovery to peak
+# on the subject token.
+model: gpt2
+backend: auto
+seed: 0
+
+fact_id: france_japan        # defined in data/facts.yaml
+metric: logit_diff           # logit_diff | answer_prob

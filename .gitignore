@@ -1,0 +1,31 @@
+# Experiment artifacts (figures, JSON results, snapshotted configs)
+outputs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Hugging Face / Torch model caches (should live in ~/.cache, never the repo)
+.cache/
+*.safetensors
+*.bin
+
+# OS
+.DS_Store
+
+# Jupytext pairs the .py walkthrough with a generated notebook locally
+notebooks/*.ipynb

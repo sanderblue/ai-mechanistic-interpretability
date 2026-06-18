@@ -1,0 +1,15 @@
+# E01 — Logit lens on GPT-2 (TransformerLens backend).
+#
+# Run:  python -m interp.run logit_lens --config configs/logit_lens_gpt2.yaml
+#
+# Watch P(" oxygen") climb across GPT-2's 12 layers and become the top prediction
+# in the mid-to-upper stack. Other clean GPT-2 examples to try:
+#   "The first president of the United States was George" -> " Washington"
+#   "The opposite of black is" -> " white"
+#   "The Colosseum is located in the city of" -> " Rome"
+model: gpt2
+backend: auto
+seed: 0
+
+prompt: "Water is made of hydrogen and"
+answer: " oxygen"
